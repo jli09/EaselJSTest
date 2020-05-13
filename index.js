@@ -1,33 +1,43 @@
 function init() {
     console.log('initialized');
 
-    const stage = new createjs.Stage('main');
+  const stage = new createjs.Stage('main');
+  let player, playerBounds, playerWidth, playerHeight;
+  
+  const img = new Image();
+  img.src = 'pietro.jpg';
 
-    const shape = new createjs.Shape();
+  img.onload = () => {
+    player = new createjs.Bitmap('pietro.jpg');
+    playerBounds = player.getBounds();
 
-    const shapeWidth = 75;
-    const shapeHeight = 75;
+    console.log('playerBounds: ', playerBounds);
 
-    shape.graphics.beginFill("red").drawRect(0, 0, shapeWidth, shapeHeight);
-    shape.x = 100;
-    shape.y = 100;
+    player.scaleX = .1;
+    player.scaleY = .1;
 
-    console.log('shape: ', shape)
+    playerWidth = playerBounds.width * player.scaleX;
+    playerHeight = playerBounds.height * player.scaleY;
 
-    stage.addChild(shape);
+    player.x = 100;
+    player.y = 100;
+
+    stage.addChild(player);
 
     stage.update();
+  }
 
-    // const tick = () => {
-    //     shape.x += 5;
-    //     if (shape.x > stage.canvas.width)
-    //         shape.x = 0;
-        
-    //     stage.update();
-    // }
+  
+    // const shape = new createjs.Shape();
 
-    // createjs.Ticker.framerate = 40;
-    // createjs.Ticker.on('tick', tick);
+    // const shapeWidth = 75;
+    // const shapeHeight = 75;
+
+    // shape.graphics.beginFill("red").drawRect(0, 0, shapeWidth, shapeHeight);
+    // shape.x = 100;
+    // shape.y = 100;
+
+
 
     document.addEventListener('keydown', (e) => {
         const { key } = e;
@@ -35,35 +45,35 @@ function init() {
         console.log('key down: ', key);
 
         if (key === 'ArrowUp' || key === 'w') {
-            if (shape.y > 0) {
-                shape.y -= 10;
+            if (player.y > 0) {
+                player.y -= 10;
                 stage.update();
             }
         }
 
         if (key === 'ArrowDown' || key === 's') {
-          if (shape.y + shapeHeight < stage.canvas.height) {
-            shape.y += 10;
+          if (player.y + playerHeight < stage.canvas.height) {
+            player.y += 10;
             stage.update();
           }
         }
 
         if (key === 'ArrowLeft' || key === 'a') {
-          if (shape.x > 0) {
-            shape.x -= 10;
+          if (player.x > 0) {
+            player.x -= 10;
             stage.update();
           }
         }
 
         if (key === 'ArrowRight' || key === 'd') {
-          if (shape.x + shapeWidth < stage.canvas.width) {
-            shape.x += 10;
+          if (player.x + playerWidth < stage.canvas.width) {
+            player.x += 10;
             stage.update();
           }
         }
     });
 
-    document.addEventListener('keyup', (e) => {
-      console.log('key up: ', e.key);
-    });
+    // document.addEventListener('keyup', (e) => {
+    //   console.log('key up: ', e.key);
+    // });
 }
