@@ -42,15 +42,25 @@ function init() {
         }
 
         if (key === 'ArrowDown' || key === 's') {
-            console.log(shape.y);
-
           if (shape.y + shapeHeight < stage.canvas.height) {
             shape.y += 10;
             stage.update();
           }
         }
-        
-        
+
+        if (key === 'ArrowLeft' || key === 'a') {
+          if (shape.x > 0) {
+            shape.x -= 10;
+            stage.update();
+          }
+        }
+
+        if (key === 'ArrowRight' || key === 'd') {
+          if (shape.x + shapeWidth < stage.canvas.width) {
+            shape.x += 10;
+            stage.update();
+          }
+        }
     });
 
     document.addEventListener('keyup', (e) => {
