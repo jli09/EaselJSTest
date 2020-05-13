@@ -1,6 +1,14 @@
 function init() {
     console.log('initialized');
 
+    document.addEventListener('keydown', (e) => {
+        console.log('key down: ', e.key);
+    })
+
+    document.addEventListener('keyup', (e) => {
+        console.log('key up: ', e.key);
+    })
+
     const stage = new createjs.Stage('main');
 
     const shape = new createjs.Shape();
