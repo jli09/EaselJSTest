@@ -10,5 +10,14 @@ function init() {
 
     stage.addChild(shape);
 
-    stage.update();
+    const tick = () => {
+        shape.x += 3;
+        if (shape.x > stage.canvas.width)
+            shape.x = 0;
+        
+        stage.update();
+    }
+
+    createjs.Ticker.on('tick', tick);
+
 }
